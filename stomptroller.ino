@@ -2,19 +2,21 @@
 #include <MIDI.h>
 
 /**  Button Config
-      ---------
-      | 1    2 |
-      |        |
-      |        |
-      | 3    4 |
-      ---------
+      ---------------
+      | 1    2    3 |
+      |             |
+      |             |
+      | 4    5    6 |
+      ---------------
 */
 
 // configure buttons
-OneButton button1(2, true, true);
-OneButton button2(3, true, true);
-OneButton button3(4, true, true);
-OneButton button4(5, true, true);
+OneButton button1(7, true, true);
+OneButton button2(6, true, true);
+OneButton button3(5, true, true);
+OneButton button4(2, true, true);
+OneButton button5(3, true, true);
+OneButton button6(4, true, true);
 
 // Create and bind the MIDI interface to the default hardware Serial port
 MIDI_CREATE_DEFAULT_INSTANCE();
@@ -35,7 +37,17 @@ void setup() {
   // button 4
   button4.attachClick(button4Press);
   button4.attachLongPressStart(button4LongPressStart);
-
+  button4.attachDoubleClick(button4DoubleClick);
+  
+  // button 5
+  button5.attachClick(button5Press);
+  button5.attachLongPressStart(button5LongPressStart);
+  
+  // button 6
+  button6.attachClick(button6Press);
+  button6.attachLongPressStart(button6LongPressStart);
+  button6.attachDoubleClick(button6DoubleClick);
+  
   // MIDI setup
   MIDI.begin();
 }
@@ -45,6 +57,8 @@ void loop() {
   button2.tick();
   button3.tick();
   button4.tick();
+  button5.tick();
+  button6.tick();
 
   // TODO: do we need the delay here as in the example?
 }
@@ -83,14 +97,45 @@ void button3LongPressStart() {
   MIDI.sendControlChange(71, 4, 1);
 }
 
-
 // button 4 Events
 void button4Press() {
-  // Tap tempo
-  MIDI.sendControlChange(64, 127, 1);
+  // 1 Switch Looper Record
+  MIDI.sendControlChange(60, 69, 1);
 }
 
 void button4LongPressStart() {
-  // show tuner
-  MIDI.sendControlChange(68, 0, 1);
+  // 1 Switch Looper Forward
+  MIDI.sendControlChange(65, 1, 1);
+}
+
+void button4DoubleClick() {
+  // 1 Switch Looper Undo/Redo
+  MIDI.sendControlChange(63, 69, 1);
+}
+
+// button 5 Events
+void button5Press() {
+  // 1 Switch Looper Overdub
+  MIDI.sendControlChange(60, 1, 1);
+}
+
+void button5LongPressStart() {
+  // 1 Switch Looper Reverse
+  MIDI.sendControlChange(65, 69, 1);
+}
+
+// button 6 Events
+void button6Press() {
+  // // 1 Switch Looper Play
+  MIDI.sendControlChange(61, 69, 1);
+}
+
+void button6LongPressStart() {
+  // 1 Switch Looper Stop
+  MIDI.sendControlChange(61, 1, 1);
+}
+
+void button6DoubleClick() {
+  // Tuner screen on/off
+  MIDI.sendControlChange(68, 69, 1);
 }
