@@ -25,6 +25,7 @@ void setup() {
   // button 1
   button1.attachClick(button1Press);
   button1.attachLongPressStart(button1LongPressStart);
+  button1.attachDoubleClick(button1DoubleClick);
 
   // button 2
   button2.attachClick(button2Press);
@@ -33,11 +34,11 @@ void setup() {
   // button 3
   button3.attachClick(button3Press);
   button3.attachLongPressStart(button3LongPressStart);
+  button3.attachDoubleClick(button3DoubleClick);
 
   // button 4
   button4.attachClick(button4Press);
   button4.attachLongPressStart(button4LongPressStart);
-  button4.attachDoubleClick(button4DoubleClick);
   
   // button 5
   button5.attachClick(button5Press);
@@ -46,7 +47,6 @@ void setup() {
   // button 6
   button6.attachClick(button6Press);
   button6.attachLongPressStart(button6LongPressStart);
-  button6.attachDoubleClick(button6DoubleClick);
   
   // MIDI setup
   MIDI.begin();
@@ -75,6 +75,12 @@ void button1LongPressStart() {
   MIDI.sendControlChange(72, 0, 1);
 }
 
+void button1DoubleClick() {
+  // 1 Switch Looper Undo/Redo
+  MIDI.sendControlChange(63, 69, 1);
+}
+
+
 // button 2 Events
 void button2Press() {
   // Snapshot 2
@@ -97,6 +103,11 @@ void button3LongPressStart() {
   MIDI.sendControlChange(71, 4, 1);
 }
 
+void button3DoubleClick() {
+  // Tuner screen on/off
+  MIDI.sendControlChange(68, 69, 1);
+}
+
 // button 4 Events
 void button4Press() {
   // 1 Switch Looper Record
@@ -106,11 +117,6 @@ void button4Press() {
 void button4LongPressStart() {
   // 1 Switch Looper Forward
   MIDI.sendControlChange(65, 1, 1);
-}
-
-void button4DoubleClick() {
-  // 1 Switch Looper Undo/Redo
-  MIDI.sendControlChange(63, 69, 1);
 }
 
 // button 5 Events
@@ -133,9 +139,4 @@ void button6Press() {
 void button6LongPressStart() {
   // 1 Switch Looper Stop
   MIDI.sendControlChange(61, 1, 1);
-}
-
-void button6DoubleClick() {
-  // Tuner screen on/off
-  MIDI.sendControlChange(68, 69, 1);
 }
