@@ -8,12 +8,10 @@ https://github.com/FortySevenEffects/arduino_midi_library
 
 
   Button Config
-  ---------------
-  | 1    2    3 |
-  |             |
-  |             |
-  | 4    5    6 |
-  ---------------
+   1    2    3 
+               
+               
+   4    5    6 
 
 
 ### Button 1
