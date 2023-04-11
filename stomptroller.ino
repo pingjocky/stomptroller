@@ -132,7 +132,7 @@ void button5LongPressStart() {
 
 // button 6 Events
 void button6Press() {
-  // // 1 Switch Looper Play
+  // 1 Switch Looper Play
   MIDI.sendControlChange(61, 69, 1);
 }
 
