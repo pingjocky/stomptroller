@@ -72,7 +72,7 @@ void button1Press() {
 
 void button1LongPressStart() {
   // FS4
-  MIDI.sendControlChange(72, 0, 1);
+  MIDI.sendControlChange(52, 0, 1);
 }
 
 void button1DoubleClick() {
@@ -89,7 +89,7 @@ void button2Press() {
 
 void button2LongPressStart() {
   // FS5
-  MIDI.sendControlChange(72, 127, 1);
+  MIDI.sendControlChange(53, 127, 1);
 }
 
 // button 3 Events
